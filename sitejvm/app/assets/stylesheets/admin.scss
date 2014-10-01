@@ -1,0 +1,45 @@
+@import "mixins";
+@import "admin/settings";
+@import "lib/foundation/scss/foundation";
+
+// common vars
+
+// global/helpers
+body{
+    overflow: hidden;
+}
+.avatar{
+    @include simple-border-radius(50%);
+    border: 2px solid #fff;
+}
+
+.full-height{
+    height: 100%;
+}
+
+// top bar
+
+#topbar{
+    height: $topbar-height;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 10;
+
+    .avatar{
+        margin-right: rem-calc(5);
+        width: 30px;
+        height: 30px;
+    }
+}
+
+// main content
+
+#content{
+
+}
+
+#topbar ~ #content {
+    margin-top: $topbar-height;
+}

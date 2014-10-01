@@ -1,0 +1,47 @@
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin simple-border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin simple-box-shadow($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow:    $shadow;
+    box-shadow:         $shadow;
+}
+
+@mixin round-bg($size) {
+    background-size: $size auto;
+    display: block;
+    height: $size;
+    width: $size;
+}
+
+@mixin flexbox() {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex($value) {
+    -webkit-box-flex: $value;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: $value;         /* OLD - Firefox 19- */
+    -webkit-flex: $value;          /* Chrome */
+    -ms-flex: $value;              /* IE 10 */
+    flex: $value;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin simple-transition($prop, $duration, $type) {
+    -webkit-transition: $prop $duration $type;
+    -moz-transition: $prop $duration $type;
+    -o-transition: $prop $duration $type;
+    transition: $prop $duration $type;
+}
