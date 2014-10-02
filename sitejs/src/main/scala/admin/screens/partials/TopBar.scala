@@ -18,7 +18,8 @@ object TopBar {
       ul(cls:="title-area")(
         li(cls:="name")(h1(
           linkTo(admin.LandingScreen)(span("GameTime"))
-        ))
+        )),
+        li(cls:="toggle-topbar menu-icon")(v(span))
       )
     )
   }
