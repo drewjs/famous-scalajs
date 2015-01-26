@@ -1,10 +1,23 @@
 @(message: String)
 
-@main("Play with Scala.js") {
-        <h1>ballz</h1>
-<h2>Play and Scala.js share a same message</h2>
-<ul>
-  <li>Play shouts out: <em>@message</em></li>
-  <li>Scala.js shouts out: <em id="scalajsShoutOut"></em></li>
-</ul>
+@import play.api.Play
+
+@base(message){
+    <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
+}{
+    <h2>Play and Scala.js share a same message</h2>
+    <ul>
+        <li>Play shouts out: <em>@message</em></li>
+        <li>Scala.js shouts out: <em id='scalajsShoutOut'></em></li>
+    </ul>
+
+    @if(Play.isProd(Play.current)) {
+        <script src='@routes.Assets.at("javascripts/sitejs-example-opt.js")' type='text/javascript'></script>
+    } else {
+        <script src='@routes.Assets.at("javascripts/sitejs-example-fastopt.js")' type='text/javascript'></script>
+    }
+
+    <script>
+        Admin().shoutout("scalajsShoutOut", "@message")
+    </script>
 }

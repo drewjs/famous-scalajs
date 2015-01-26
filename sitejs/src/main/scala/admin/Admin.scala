@@ -62,4 +62,10 @@ object Admin {
   def main(): Unit = {
     dom.document.body.appendChild(view.render)
   }
+
+  @JSExport
+  def shoutout(id: String, message: String): Unit = {
+    val elem = dom.document.getElementById(id)
+    elem.appendChild(span(message).render)
+  }
 }
