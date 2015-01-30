@@ -1,10 +1,13 @@
 import sbt._
 import Keys._
+import play.PlayScala
 import play.Play._
-import scala.scalajs.sbtplugin.ScalaJSPlugin._
-import ScalaJSKeys._
 import com.typesafe.sbt.packager.universal.UniversalKeys
 import com.typesafe.sbteclipse.core.EclipsePlugin.EclipseKeys
+import org.scalajs.sbtplugin.ScalaJSPlugin
+import org.scalajs.sbtplugin.ScalaJSPlugin._
+import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
+import org.scalajs.sbtplugin.cross.{CrossProject, CrossType}
 
 object ApplicationBuild extends Build with UniversalKeys {
 
@@ -16,13 +19,16 @@ object ApplicationBuild extends Build with UniversalKeys {
 
   lazy val sitejvm = Project(
     id = "sitejvm",
-    base = file("sitejvm")
-  ) enablePlugins (play.PlayScala) settings (sitejvmSettings: _*) aggregate (sitejs)
+    base = file("sitejvm"))
+  .enablePlugins(play.PlayScala)
+  .settings(sitejvmSettings: _*)
+  .aggregate(sitejs)
 
   lazy val sitejs = Project(
     id = "sitejs",
-    base = file("sitejs")
-  ) settings (sitejsSettings: _*)
+    base = file("sitejs"))
+  .enablePlugins(ScalaJSPlugin)
+  .settings(sitejsSettings: _*)
 
   lazy val shared = Project(
     id = "shared",
@@ -34,22 +40,21 @@ object ApplicationBuild extends Build with UniversalKeys {
       name := "stab-project",
       version := Versions.app,
       scalaVersion := Versions.scala,
-      scalajsOutputDir := (classDirectory in Compile).value / "public" / "javascripts",
-      //scalajsOutputDir := (crossTarget in Compile).value / "classes" / "public" / "javascripts",
+      //scalajsOutputDir := (classDirectory in Compile).value / "public" / "javascripts",
+      scalajsOutputDir := (crossTarget in Compile).value / "classes" / "public" / "javascripts",
       compile in Compile <<= (compile in Compile) dependsOn (fastOptJS in (sitejs, Compile)) dependsOn copySourceMapsTask,
       dist <<= dist dependsOn (fullOptJS in (sitejs, Compile)),
-      stage <<= stage dependsOn (fullOptJS in (sitejs, Compile)),
+      //stage <<= stage dependsOn (fullOptJS in (sitejs, Compile)),
       libraryDependencies ++= Dependencies.sitejvm.value,
       EclipseKeys.skipParents in ThisBuild := false,
       commands += preStartCommand
     ) ++ (
-      Seq(packageLauncher, fastOptJS, fullOptJS) map { packageJSKey =>
+      Seq(packageScalaJSLauncher, fastOptJS, fullOptJS) map { packageJSKey =>
         crossTarget in (sitejs, Compile, packageJSKey) := scalajsOutputDir.value
       }
     ) ++ sharedDirectorySettings
 
-  lazy val sitejsSettings =
-    scalaJSSettings ++ Seq(
+  lazy val sitejsSettings = Seq(
       name := "sitejs-example",
       version := Versions.app,
       scalaVersion := Versions.scala,
@@ -103,30 +108,30 @@ object Dependencies {
     "org.webjars" % "modernizr" % "2.7.1",
     "org.webjars" % "jquery" % "2.1.1",
     "org.webjars" % "foundation" % "5.4.0",
-    "org.webjars" % "font-awesome" % "4.2.0",
-    "com.scalatags" %% "scalatags" % Versions.scalatags,
+    "org.webjars" % "font-awesome" % "4.3.0-1",
+    "com.lihaoyi" %% "scalatags" % Versions.scalatags,
     "com.lihaoyi" %% "upickle" % Versions.upickle,
     "com.lihaoyi" %% "autowire" % Versions.autowire,
-    "com.scalarx" %% "scalarx" % Versions.scalaRx
+    "com.lihaoyi" %% "scalarx" % Versions.scalaRx,
+    "com.vmunier" %% "play-scalajs-sourcemaps" % Versions.playScalajsSourcemaps
   )) 
 
   val sitejs = Def.setting(shared.value ++ Seq(
-    "com.scalatags" %%%! "scalatags" % Versions.scalatags,
-    "com.scalarx" %%%! "scalarx" % Versions.scalaRx,
+    "com.lihaoyi" %%%! "scalatags" % Versions.scalatags,
+    "com.lihaoyi" %%%! "scalarx" % Versions.scalaRx,
     "com.lihaoyi" %%%! "upickle" % Versions.upickle,
     "com.lihaoyi" %%%! "autowire" % Versions.autowire,
-    "org.scalajs" %%%! "scala-parser-combinators" % Versions.combinator,
-    "org.scala-lang.modules.scalajs" %%%! "scalajs-dom" % Versions.scalajsDom
+    "org.scala-js" %%%! "scalajs-dom" % Versions.scalajsDom
   ))
 }
 
 object Versions {
   val app = "0.1.0-SNAPSHOT"
-  val scala = "2.11.1"
-  val scalajsDom = "0.6"
-  val scalaRx = "0.2.6"
-  val scalatags = "0.4.0"
-  val upickle = "0.2.4"
-  val autowire = "0.2.3"
-  val combinator = "1.0.1"
+  val playScalajsSourcemaps = "0.1.0"
+  val scala = "2.11.4"
+  val scalajsDom = "0.7.0"
+  val scalaRx = "0.2.7-RC1"
+  val scalatags = "0.4.3-RC1"
+  val upickle = "0.2.6-RC1"
+  val autowire = "0.2.4-RC1"
 }

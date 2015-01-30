@@ -4,7 +4,6 @@ import rx._
 import org.scalajs.dom
 import org.scalajs.dom.{PopStateEvent, Event}
 import scalatags.JsDom.all._
-import scala.util.parsing.combinator._
 
 trait LocalLink {
   def toFragment: String
