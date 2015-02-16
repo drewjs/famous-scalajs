@@ -2,7 +2,6 @@ package admin.screens
 
 import admin.LocalProfile
 import org.scalajs.dom
-import org.scalajs.dom.{HTMLInputElement, HTMLFormElement}
 
 import scalatags.JsDom.all._
 import Common._
@@ -16,7 +15,7 @@ object Login {
   val EMAIL_ID = "login-email"
   val PASSWORD_ID = "login-password"
 
-  val loginForm: HTMLFormElement = {
+  val loginForm: dom.html.Form = {
     form(onsubmit:={ () => loginFormHandler()})(
       input(id:=EMAIL_ID,`type`:="text", placeholder:="email"),
       input(id:=PASSWORD_ID,`type`:="password", placeholder:="password"),
@@ -30,8 +29,8 @@ object Login {
   }
 
   def loginFormHandler(): Boolean = {
-    val email = dom.document.getElementById(EMAIL_ID).asInstanceOf[HTMLInputElement].value
-    val pw = dom.document.getElementById(PASSWORD_ID).asInstanceOf[HTMLInputElement].value
+    val email = dom.document.getElementById(EMAIL_ID).asInstanceOf[dom.html.Input].value
+    val pw = dom.document.getElementById(PASSWORD_ID).asInstanceOf[dom.html.Input].value
 
     LocalProfile.user() = Option(LocalProfile.fakeUser)
     loginForm.reset()
