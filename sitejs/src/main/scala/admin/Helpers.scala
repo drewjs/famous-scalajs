@@ -4,7 +4,7 @@ import rx._
 import common.Common._
 import common.Framework._
 import scalatags.JsDom.all._
-import admin.{AdminScreen, Admin}
+import admin._
 
 object Helpers {
 
@@ -12,7 +12,7 @@ object Helpers {
     v(onclick:={ () => Admin.router.linkTo(screen)})(content)
   }
 
-  def rxNavItem(screen: admin.AdminScreen)(content: HtmlTag): HtmlTag = {
+  def rxNavItem(screen: AdminScreen)(content: HtmlTag): HtmlTag = {
     li(cls := Rx {s"${if(Admin.router.current() == screen) "active" else ""}"})(Helpers.linkTo(screen)(content))
   }
 
