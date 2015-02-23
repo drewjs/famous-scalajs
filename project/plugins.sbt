@@ -17,6 +17,6 @@ addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.6.0")
 
 addSbtPlugin("default" % "sbt-sass" % "0.1.9")
 
-addSbtPlugin("com.vmunier" % "sbt-play-scalajs" % "0.2.1")
+addSbtPlugin("com.vmunier" % "sbt-play-scalajs" % "0.2.3")
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-gzip" % "1.0.0")

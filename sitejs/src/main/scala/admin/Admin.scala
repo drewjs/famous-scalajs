@@ -21,8 +21,7 @@ import Common._
 sealed trait AdminScreen
 case object DashboardScreen extends AdminScreen
 
-@JSExport
-object Admin {
+object Admin extends js.JSApp {
 
   import Framework._
 
@@ -47,7 +46,6 @@ object Admin {
     },10)
   }
 
-  @JSExport
   def main(): Unit = {
     dom.document.body.appendChild(div(cls:="fill-height")(current).render)
   }
