@@ -15,7 +15,7 @@ object TopBar {
     nav(cls:="top-bar", "data-topbar".attr:="", "role".attr:="navigation")(
       ul(cls:="title-area")(
         li(cls:="name")(h1(
-          linkTo(DashboardScreen)(span("Spark Admin"))
+          linkTo(DashboardScreen)(span("Admin Panel"))
         )),
         li(cls:="toggle-topbar menu-icon")(v(span))
       )
