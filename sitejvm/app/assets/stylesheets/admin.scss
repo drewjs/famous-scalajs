@@ -29,6 +29,17 @@ html, body {
   padding-right: $content-padding;
 }
 
+.zoomcrop {
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+
+  &.centered {
+    background-position: 50%;
+  }
+}
+
 // avatars
 $avatar-size: rem-calc(175);
 $avatar-size-xsmall: rem-calc(30);

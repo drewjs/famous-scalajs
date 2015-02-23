@@ -17,4 +17,9 @@ object Common {
 
   // temp
   val userImg: String = "http://placehold.it/500&text=USER"
+
+  def dropdownMenu(menuId: String)(toggle: HtmlTag)(items: Seq[HtmlTag]): Seq[HtmlTag] = Seq(
+    toggle("data-dropdown".attr:=menuId, "aria-controls".attr:=menuId, "aria-expanded".attr:="false"),
+    ul(id:=menuId, cls:="f-dropdown", "data-dropdown-content".attr:="", "aria-hidden".attr:="true", tabindex:="-1")(items)
+  )
 }
