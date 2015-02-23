@@ -3,43 +3,65 @@
 @import "lib/foundation/scss/foundation";
 
 // common vars
+$content-padding: rem-calc(20);
 
 // global/helpers
-body{
-    overflow: hidden;
-}
-.avatar{
-    @include simple-border-radius(50%);
-    border: 2px solid #fff;
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 
-.full-height{
-    height: 100%;
+.disable {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-// top bar
+.fill-height {
+  @include fill-screen-height;
+}
 
-#topbar{
-    height: $topbar-height;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 10;
+.pad-content {
+  padding: $content-padding;
+}
 
-    .avatar{
-        margin-right: rem-calc(5);
-        width: 30px;
-        height: 30px;
-    }
+.l-pad-content {
+  padding-left: $content-padding;
+  padding-right: $content-padding;
+}
+
+// avatars
+$avatar-size: rem-calc(175);
+$avatar-size-xsmall: rem-calc(30);
+.avatar {
+  border-radius: 50%;
+  max-width: 100%;
+  width: $avatar-size;
+
+  &.x-small {
+    border-width: rem-calc(2);
+    width: $avatar-size-xsmall;
+  }
+}
+
+// topbar layout
+.layout-topbar {
+  @include fill-screen-height;
+  display: flex;
+  flex-flow: column nowrap;
+
+  > nav {
+    flex: 0 0 auto;
+  }
+
+  > main {
+    @include scroll-y;
+    flex: 1 1 auto;
+  }
 }
 
 // main content
 
-#content{
-
-}
-
-#topbar ~ #content {
-    margin-top: $topbar-height;
+#content {
+  padding-top: $content-padding;
+  padding-bottom: $content-padding;
 }

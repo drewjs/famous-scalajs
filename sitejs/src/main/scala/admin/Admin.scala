@@ -1,5 +1,12 @@
 package admin
 
+import common.{Framework, Common}
+import upickle._
+import locallink._
+import locallink.internal._ //TODO FIGURE OUT HOW TO NOT NEED THIS
+import scala.concurrent.{Future,ExecutionContext} //TODO FIGURE OUT HOW TO NOT NEED THIS (if only for locallink)
+import scalajs.concurrent.JSExecutionContext.Implicits.queue
+
 import scala.scalajs._
 import scala.scalajs.js.annotation.JSExport
 import js.Dynamic.{ global => g }
@@ -8,37 +15,28 @@ import scalatags.JsDom.all._
 import rx._
 
 import screens._
-import screens.Common._
+import Common._
 
 
-trait Screen
-case object LoginScreen extends Screen
-case object LandingScreen extends Screen
-case object UsersScreen extends Screen
-case object GamesScreen extends Screen
-case object PlatformsScreen extends Screen
+sealed trait AdminScreen
+case object DashboardScreen extends AdminScreen
 
 @JSExport
 object Admin {
 
   import Framework._
 
-  // default screen
-  lazy val screen: Var[Screen] = Var(LoginScreen)
+  val router: Router[AdminScreen] = Router.generate[AdminScreen](DashboardScreen)
 
   // get current screen
   private lazy val current: Rx[HtmlTag] = Rx {
-    screen() match {
-      case LoginScreen => Login.screen()
-      case LandingScreen => Landing.screen()
-      case UsersScreen => Users.screen()
-      case GamesScreen => Games.screen()
-      case PlatformsScreen => Platforms.screen()
+    router.current() match {
+      case DashboardScreen => Dashboard.screen()
       case _ => page("page missing")
     }
   }
 
-  val screenObs = Obs(screen) {
+  val screenObs = Obs(router.current) {
     refreshFoundation()
   }
 
@@ -49,18 +47,9 @@ object Admin {
     },10)
   }
 
-
-  // main view
-  val view = {
-    div(cls:="full-height")(
-      partials.TopBar.topbar,
-      current
-    )
-  }
-
   @JSExport
   def main(): Unit = {
-    dom.document.body.appendChild(view.render)
+    dom.document.body.appendChild(div(cls:="fill-height")(current).render)
   }
 
   @JSExport

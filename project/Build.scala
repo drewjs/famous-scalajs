@@ -100,7 +100,9 @@ object ApplicationBuild extends Build with UniversalKeys {
 }
 
 object Dependencies {
-  val shared = Def.setting(Seq())
+  val shared = Def.setting(Seq(
+    "com.lihaoyi" %%% "upickle" % Versions.upickle
+  ))
 
   val sitejvm = Def.setting(shared.value ++ Seq(
     "org.webjars" %% "webjars-play" % "2.3.0",
@@ -110,18 +112,18 @@ object Dependencies {
     "org.webjars" % "foundation" % "5.4.0",
     "org.webjars" % "font-awesome" % "4.3.0-1",
     "com.lihaoyi" %% "scalatags" % Versions.scalatags,
-    "com.lihaoyi" %% "upickle" % Versions.upickle,
     "com.lihaoyi" %% "autowire" % Versions.autowire,
     "com.lihaoyi" %% "scalarx" % Versions.scalaRx,
     "com.vmunier" %% "play-scalajs-sourcemaps" % Versions.playScalajsSourcemaps
   )) 
 
   val sitejs = Def.setting(shared.value ++ Seq(
-    "com.lihaoyi" %%%! "scalatags" % Versions.scalatags,
-    "com.lihaoyi" %%%! "scalarx" % Versions.scalaRx,
-    "com.lihaoyi" %%%! "upickle" % Versions.upickle,
-    "com.lihaoyi" %%%! "autowire" % Versions.autowire,
-    "org.scala-js" %%%! "scalajs-dom" % Versions.scalajsDom
+    "com.lihaoyi" %%% "scalatags" % Versions.scalatags,
+    "com.lihaoyi" %%% "scalarx" % Versions.scalaRx,
+    "com.lihaoyi" %%% "autowire" % Versions.autowire,
+    "org.scala-js" %%% "scalajs-dom" % Versions.scalajsDom,
+    "com.stabletech" %%% "local-link" % "0.0.3-SNAPSHOT",
+    "com.stabletech" %%% "formidable" % "0.0.3-SNAPSHOT"
   ))
 }
 
@@ -129,9 +131,9 @@ object Versions {
   val app = "0.1.0-SNAPSHOT"
   val playScalajsSourcemaps = "0.1.0"
   val scala = "2.11.4"
-  val scalajsDom = "0.7.0"
-  val scalaRx = "0.2.7-RC1"
-  val scalatags = "0.4.3-RC1"
-  val upickle = "0.2.6-RC1"
-  val autowire = "0.2.4-RC1"
+  val scalajsDom = "0.8.0"
+  val scalaRx = "0.2.7"
+  val scalatags = "0.4.5"
+  val upickle = "0.2.6"
+  val autowire = "0.2.4"
 }

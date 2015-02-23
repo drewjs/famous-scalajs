@@ -1,13 +1,12 @@
-package admin
+package common
 
-import scala.collection.{SortedMap, mutable}
-import scalatags.JsDom.all._
-import scala.util.{Failure, Success, Random}
-import rx._
-import rx.core.{Propagator, Obs}
 import org.scalajs.dom
-import org.scalajs.dom.{Element, DOMParser}
-import scala.scalajs.js
+import org.scalajs.dom.Element
+import rx._
+import rx.core.Obs
+
+import scala.util.{Failure, Success}
+import scalatags.JsDom.all._
 
 
 /**
@@ -29,7 +28,7 @@ object Framework {
    * the Obs onto the element itself so we have a reference to kill it when
    * the element leaves the DOM (e.g. it gets deleted).
    */
-  implicit def rxMod[T <: dom.HTMLElement](r: Rx[HtmlTag]): Modifier = {
+  implicit def rxMod[T <: dom.html.Element](r: Rx[HtmlTag]): Modifier = {
     def rSafe = r.toTry match {
       case Success(v) => v.render
       case Failure(e) => span(e.toString, backgroundColor := "red").render
