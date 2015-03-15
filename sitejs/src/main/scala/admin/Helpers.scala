@@ -9,7 +9,7 @@ import admin._
 object Helpers {
 
   def linkTo(screen: AdminScreen)(content: HtmlTag): HtmlTag = {
-    v(onclick:={ () => Admin.router.linkTo(screen)})(content)
+    v(onclick:={ () => Admin.router.goto(screen)})(content)
   }
 
   def rxNavItem(screen: AdminScreen)(content: HtmlTag): HtmlTag = {
