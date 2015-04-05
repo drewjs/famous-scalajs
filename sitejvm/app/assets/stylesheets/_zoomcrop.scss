@@ -1,0 +1,22 @@
+.zc {
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+
+  &.zc--square {
+    &:after {
+      display: block;
+      content: "";
+      padding-top: 100%;
+    }
+  }
+
+  &.zc--center {
+    background-position: 50%;
+  }
+
+  &.zc--contain {
+    background-size: contain;
+  }
+}

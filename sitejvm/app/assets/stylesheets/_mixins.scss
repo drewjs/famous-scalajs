@@ -30,3 +30,7 @@
 @function shade($color, $percent){
   @return mix(black, $color, $percent);
 }
+
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
