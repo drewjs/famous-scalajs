@@ -70,7 +70,7 @@ object ApplicationBuild extends Build with UniversalKeys {
       "com.lihaoyi" %%% "autowire" % Versions.autowire,
       "org.scala-js" %%% "scalajs-dom" % Versions.scalajsDom,
       "com.stabletech" %%% "local-link" % "0.0.3-SNAPSHOT",
-      "com.stabletech" %%% "formidable" % "0.0.3-SNAPSHOT"
+      "com.stabletech" %%% "formidable" % "0.0.4-SNAPSHOT"
     )
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSPlay)
