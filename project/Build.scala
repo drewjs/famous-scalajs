@@ -19,12 +19,12 @@ import com.typesafe.sbt.web.pipeline.Pipeline
 
 object Versions {
   val app = "0.1.0-SNAPSHOT"
-  val scala = "2.11.5"
+  val scala = "2.11.6"
   val scalajsDom = "0.8.0"
-  val scalaRx = "0.2.7"
-  val scalatags = "0.4.5"
-  val upickle = "0.2.6"
-  val autowire = "0.2.4"
+  val scalaRx = "0.2.8"
+  val scalatags = "0.4.6"
+  val upickle = "0.2.8"
+  val autowire = "0.2.5"
 }
 
 object ApplicationBuild extends Build with UniversalKeys {
@@ -63,6 +63,10 @@ object ApplicationBuild extends Build with UniversalKeys {
     persistLauncher in Test := false,
     sourceMapsDirectories += sitejsShared.base / "..",
     unmanagedSourceDirectories in Compile := Seq((scalaSource in Compile).value),
+    resolvers ++= Seq(
+      "formidable github repo" at "http://voltir.github.io/formidable/",
+      "local-link github repo" at "http://voltir.github.io/local-link/"
+    ),
     libraryDependencies ++= Seq(
       "com.lihaoyi" %%% "scalatags" % Versions.scalatags,
       "com.lihaoyi" %%% "scalarx" % Versions.scalaRx,
