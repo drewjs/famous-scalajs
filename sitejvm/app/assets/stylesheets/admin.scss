@@ -1,0 +1,74 @@
+@import "mixins";
+@import "admin/settings";
+@import "lib/foundation/scss/foundation";
+
+// common vars
+$content-padding: rem-calc(20);
+
+// global/helpers
+
+.disable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.fill-height {
+  @include fill-screen-height;
+}
+
+.pad-content {
+  padding: $content-padding;
+}
+
+.l-pad-content {
+  padding-left: $content-padding;
+  padding-right: $content-padding;
+}
+
+.zoomcrop {
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+
+  &.centered {
+    background-position: 50%;
+  }
+}
+
+// avatars
+$avatar-size: rem-calc(175);
+$avatar-size-xsmall: rem-calc(30);
+.avatar {
+  border-radius: 50%;
+  max-width: 100%;
+  width: $avatar-size;
+
+  &.x-small {
+    border-width: rem-calc(2);
+    width: $avatar-size-xsmall;
+  }
+}
+
+// topbar layout
+.layout-topbar {
+  @include fill-screen-height;
+  display: flex;
+  flex-flow: column nowrap;
+
+  > nav {
+    flex: 0 0 auto;
+  }
+
+  > main {
+    @include scroll-y;
+    flex: 1 1 auto;
+  }
+}
+
+// main content
+
+#content {
+  padding-top: $content-padding;
+  padding-bottom: $content-padding;
+}

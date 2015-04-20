@@ -1,0 +1,133 @@
+$grid-parent: grid;
+$grid-cell: #{$grid-parent}-cell;
+
+$grid-gutter-spacing: $column-gutter / 2;
+
+$grid-modifiers-spacing: (
+        --gutter: $grid-gutter-spacing,
+        --collapse: 0
+);
+
+$grid-modifiers-flow:
+  (--row, row, wrap),
+  (--row-nowrap, row, nowrap),
+  (--column, column, wrap),
+  (--column-nowrap, column, nowrap);
+
+$grid-modifiers-align: (
+        --top: flex-start,
+        --center: center,
+        --bottom: flex-end
+);
+
+$grid-modifiers-flex: (
+        --auto: none,
+        --fit: 1,
+        --full: 0 0 100%,
+        --half: 0 0 50%,
+        --third: 0 0 33.3333%,
+        --fourth: 0 0 25%
+);
+
+.#{$grid-parent} {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: -$grid-gutter-spacing 0 #{$grid-gutter-spacing} -$grid-gutter-spacing;
+  padding: 0;
+
+  @each $sel, $direction, $wrap  in $grid-modifiers-flow {
+    &#{$sel}{
+      flex-direction: $direction;
+      flex-wrap: $wrap;
+    }
+  }
+
+  @each $sel, $val in $grid-modifiers-align {
+    &#{$sel}{
+      align-items: $val;
+    };
+  }
+
+  &--justify-center {
+    justify-content: center;
+  }
+
+  @each $sel, $val in $grid-modifiers-spacing {
+    &#{$sel}{
+      margin: -$val 0 #{$val} -$val;
+    };
+  }
+}
+
+.#{$grid-cell} {
+  flex: 1;
+  padding: $grid-gutter-spacing 0 0 $grid-gutter-spacing;
+
+  @each $sel, $val in $grid-modifiers-align {
+    &#{$sel}{
+      align-self: $val;
+    };
+  }
+
+  .#{$grid-parent}--flex-cells > & {
+    display: flex;
+  }
+
+  @each $sel, $val in $grid-modifiers-flex {
+    .#{$grid-parent + $sel} > & {
+      flex: $val;
+    }
+
+    &#{$sel} {
+      flex: $val;
+    }
+  }
+
+  @each $sel, $val in $grid-modifiers-spacing {
+    .#{$grid-parent + $sel} > & {
+      padding: $val 0 0 $val;
+    };
+  }
+}
+
+// GRID RESPONSIVE
+
+$breakpoints: (
+        small: $small-up,
+        medium: $medium-up,
+        large: $large-up
+);
+
+@each $bp, $query in $breakpoints {
+  @at-root{
+    @media #{$query} {
+
+      @each $sel, $val in $grid-modifiers-spacing {
+        .#{$bp + "-" + $grid-parent + $sel}{
+          margin: -$val 0 #{$val} -$val;
+        };
+
+        .#{$bp + "-" + $grid-parent + $sel} > .#{$grid-cell} {
+          padding: $val 0 0 $val;
+        };
+      }
+
+      @each $sel, $direction, $wrap in $grid-modifiers-flow {
+        .#{$bp + "-" + $grid-parent + $sel}{
+          flex-direction: $direction;
+          flex-wrap: $wrap;
+        }
+      }
+
+      @each $sel, $val in $grid-modifiers-flex {
+        .#{$bp + "-" + $grid-parent + $sel} > .#{$grid-cell} {
+          flex: $val;
+        }
+        .#{$bp + "-" + $grid-cell + $sel} {
+          flex: $val;
+        }
+      }
+    }
+  }
+}

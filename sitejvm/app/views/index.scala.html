@@ -1,0 +1,18 @@
+@(message: String)
+
+@import play.api.Play
+
+@base(message){
+    <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
+}{
+    <h2>Play and Scala.js share a same message</h2>
+    <ul>
+        <li>Play shouts out: <em>@message</em></li>
+        <li>Scala.js shouts out: <em id='scalajsShoutOut'></em></li>
+    </ul>
+
+    @playscalajs.html.scripts(projectName = "sitejs", "/assets")
+    <script>
+        admin.Admin().shoutout("scalajsShoutOut", "@message")
+    </script>
+}

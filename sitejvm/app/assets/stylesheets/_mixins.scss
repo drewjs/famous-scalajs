@@ -1,0 +1,36 @@
+@mixin round-bg($size) {
+    background-size: $size auto;
+    display: block;
+    height: $size;
+    width: $size;
+}
+
+@mixin fill-screen-height() {
+  height: 100%;
+  height: 100vh;
+}
+
+@mixin scroll-y() {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@function white($opacity) {
+  @return rgba(255, 255, 255, $opacity);
+}
+
+@function black($opacity) {
+  @return rgba(0, 0, 0, $opacity);
+}
+
+@function tint($color, $percent){
+  @return mix(white, $color, $percent);
+}
+
+@function shade($color, $percent){
+  @return mix(black, $color, $percent);
+}
+
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
