@@ -5,13 +5,14 @@
 @base(title){
     <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,300,400,600,700' rel='stylesheet' type='text/css'>
-    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/font-awesome.css"))'>
+    @*<link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/font-awesome.css"))'>*@
+    <link rel='stylesheet' href='@routes.Assets.at("lib/font-awesome/css/font-awesome.css")'>
     <link rel='stylesheet' href='@routes.Assets.at("stylesheets/admin.css")'>
-    <script src='@routes.WebJarAssets.at(WebJarAssets.locate("modernizr.js"))'></script>
+    @*<script src='@routes.WebJarAssets.at(WebJarAssets.locate("modernizr.js"))'></script>*@
 }{
-    <script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
-    <script src='@routes.WebJarAssets.at(WebJarAssets.locate("foundation.min.js"))'></script>
+    @*<script src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
+    <script src='@routes.WebJarAssets.at(WebJarAssets.locate("foundation.min.js"))'></script>*@
     <script src='@routes.Application.jsRoutes' type='text/javascript'></script>
 
-    @playscalajs.html.scripts("/assets", projectName = "sitejs") 
+    @playscalajs.html.scripts(projectName = "sitejs", "/assets")
 }

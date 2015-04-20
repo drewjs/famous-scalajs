@@ -36,7 +36,7 @@ object Admin extends js.JSApp {
   }
 
   val screenObs = Obs(router.current) {
-    refreshFoundation()
+    //refreshFoundation() enable only if foundationJS and jquery required
   }
 
   // foundation helper

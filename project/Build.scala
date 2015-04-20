@@ -22,7 +22,7 @@ object Versions {
   val scala = "2.11.6"
   val scalajsDom = "0.8.0"
   val scalaRx = "0.2.8"
-  val scalatags = "0.4.6"
+  val scalatags = "0.5.1"
   val upickle = "0.2.8"
   val autowire = "0.2.5"
 }
@@ -38,17 +38,17 @@ object ApplicationBuild extends Build with UniversalKeys {
     scalaJSProjects := clients,
     pipelineStages := Seq(scalaJSProd, gzip),
     libraryDependencies ++= Seq(
-      "org.webjars" %% "webjars-play" % "2.3.0",
+      //"org.webjars" %% "webjars-play" % "2.3.0",
       "org.webjars" % "fastclick" % "1.0.2",
-      "org.webjars" % "modernizr" % "2.7.1",
-      "org.webjars" % "jquery" % "2.1.1",
-      "org.webjars" % "foundation" % "5.4.0",
+      "org.webjars" % "modernizr" % "2.8.3",
+      "org.webjars" % "jquery" % "2.1.3",
+      "org.webjars" % "foundation" % "5.5.1",
       "org.webjars" % "font-awesome" % "4.3.0-1",
       "com.lihaoyi" %% "scalatags" % Versions.scalatags,
       "com.lihaoyi" %% "scalarx" % Versions.scalaRx,
       "com.lihaoyi" %% "upickle" % Versions.upickle,
       "com.lihaoyi" %% "autowire" % Versions.autowire,
-      "com.vmunier" %% "play-scalajs-scripts" % "0.1.0",
+      "com.vmunier" %% "play-scalajs-scripts" % "0.2.0",
       "org.webjars" % "jquery" % "1.11.1"
     ),
     EclipseKeys.skipParents in ThisBuild := false
@@ -73,7 +73,7 @@ object ApplicationBuild extends Build with UniversalKeys {
       "com.lihaoyi" %%% "upickle" % Versions.upickle,
       "com.lihaoyi" %%% "autowire" % Versions.autowire,
       "org.scala-js" %%% "scalajs-dom" % Versions.scalajsDom,
-      "com.stabletech" %%% "local-link" % "0.0.3-SNAPSHOT",
+      "com.stabletech" %%% "local-link" % "0.0.4-SNAPSHOT",
       "com.stabletech" %%% "formidable" % "0.0.4-SNAPSHOT"
     )
   )

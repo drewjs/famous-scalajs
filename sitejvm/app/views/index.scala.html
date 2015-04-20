@@ -11,7 +11,7 @@
         <li>Scala.js shouts out: <em id='scalajsShoutOut'></em></li>
     </ul>
 
-    @playscalajs.html.scripts("/assets", projectName = "sitejs")
+    @playscalajs.html.scripts(projectName = "sitejs", "/assets")
     <script>
         admin.Admin().shoutout("scalajsShoutOut", "@message")
     </script>
