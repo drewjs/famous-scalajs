@@ -59,7 +59,7 @@ object ApplicationBuild extends Build with UniversalKeys {
 
   lazy val sitejs = (project in file("sitejs")).settings(
     scalaVersion := Versions.scala,
-    persistLauncher := true,
+    persistLauncher := false,
     persistLauncher in Test := false,
     sourceMapsDirectories += sitejsShared.base / "..",
     unmanagedSourceDirectories in Compile := Seq((scalaSource in Compile).value),
